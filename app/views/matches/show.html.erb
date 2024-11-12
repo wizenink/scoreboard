@@ -1,0 +1,76 @@
+<div class="max-w-lg mx-auto mt-10 bg-white p-6 rounded-lg shadow-lg">
+  <h1 class="text-2xl font-bold text-center mb-6">
+    Match: <%= @match.team_a %> vs <%= @match.team_b %>
+  </h1>
+
+  <div class="flex justify-between p-5 mb-6 bg-gray-100 rounded-lg">
+    <div class="text-center">
+      <h2 class="text-xl font-semibold"><%= @match.team_a %></h2>
+      <p class="text-4xl" id="score-team-a"><%= @match.goals_team_a %></p>
+    </div>
+
+    <div class="text-center">
+      <h2 class="text-xl font-semibold"><%= @match.team_b %></h2>
+      <p class="text-4xl" id="score-team-b"><%= @match.goals_team_b %></p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4">
+    <button id="increment-team-a" class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700">
+      Increment <%= @match.team_a %> Score
+    </button>
+
+    <button id="increment-team-b" class="bg-red-600 text-white p-4 rounded-lg hover:bg-red-700">
+      Increment <%= @match.team_b %> Score
+    </button>
+
+    <button id="decrement-team-a" class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700">
+      Decrement <%= @match.team_a %> Score
+    </button>
+
+    <button id="decrement-team-b" class="bg-red-600 text-white p-4 rounded-lg hover:bg-red-700">
+      Decrement <%= @match.team_b %> Score
+    </button>
+  </div>
+  <div class="flex gap-4 mt-4 justify-center">
+    <%= link_to "Production link", prod_show_match_path(@match),class: "bg-green-600 text-white p-4 rounded-md hover:bg-green-700", target: :_blank %>
+    <%= button_to "Delete match", match_path(@match),class: "bg-red-600 text-white p-4 rounded-md hover:bg-red-700", :method => :delete %>
+  </div>
+</div>
+
+<!-- This hidden field is used for JavaScript to get the match ID -->
+<div id="match-id" data-match-id="<%= @match.id %>" style="display: none;"></div>
+
+<!-- JavaScript for button actions -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('increment-team-a').addEventListener('click', function() {
+            fetch('<%= increment_score_match_path(@match, team: 'a') %>', {
+                method: 'POST',
+                headers: { 'X-CSRF-Token': '<%= form_authenticity_token %>' }
+            });
+        });
+
+        document.getElementById('increment-team-b').addEventListener('click', function() {
+            fetch('<%= increment_score_match_path(@match, team: 'b') %>', {
+                method: 'POST',
+                headers: { 'X-CSRF-Token': '<%= form_authenticity_token %>' }
+            });
+        });
+
+
+        document.getElementById('decrement-team-a').addEventListener('click', function() {
+            fetch('<%= decrement_score_match_path(@match, team: 'a') %>', {
+                method: 'POST',
+                headers: { 'X-CSRF-Token': '<%= form_authenticity_token %>' }
+            });
+        });
+
+        document.getElementById('decrement-team-b').addEventListener('click', function() {
+            fetch('<%= decrement_score_match_path(@match, team: 'b') %>', {
+                method: 'POST',
+                headers: { 'X-CSRF-Token': '<%= form_authenticity_token %>' }
+            });
+        });
+    });
+</script>

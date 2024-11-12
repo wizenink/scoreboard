@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team_a: MyString
+  team_b: MyString
+  goals_team_a: 1
+  goals_team_b: 1
+
+two:
+  team_a: MyString
+  team_b: MyString
+  goals_team_a: 1
+  goals_team_b: 1
