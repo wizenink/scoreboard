@@ -50,7 +50,7 @@ RUN bundle install && \
 
 # Install node modules
 COPY package.json yarn.lock ./
-RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf
+# RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf
 RUN yarn install --frozen-lockfile
 
 # Copy application code
