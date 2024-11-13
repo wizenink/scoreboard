@@ -30,7 +30,7 @@ FROM base AS build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git node-gyp pkg-config python-is-python3 && \
+    apt-get install --no-install-recommends -y build-essential git node-gyp pkg-config python-is-python3&& \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install JavaScript dependencies
@@ -50,6 +50,7 @@ RUN bundle install && \
 
 # Install node modules
 COPY package.json yarn.lock ./
+RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf
 RUN yarn install --frozen-lockfile
 
 # Copy application code
