@@ -30,5 +30,13 @@
     </div>
   <% end %>
   <%= yield %>
+
+  <% unless params[:action] == 'prod_show' %>
+    <div class="fixed bottom-0 right-0 p-4 text-xs text-gray-600 opacity-50">
+      <% puts "VERSION #{Rails.configuration.app_version}" %>
+      <%= Rails.configuration.app_version %>
+    </div>
+  <% end %>
+
   </body>
 </html>
