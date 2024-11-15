@@ -1,5 +1,7 @@
 class MatchesController < ApplicationController
 
+  http_basic_authenticate_with name: Rails.application.credentials.dig(:login, :username), password: Rails.application.credentials.dig(:login, :password), except: :prod_show
+
   def show
     @match = Match.find(params[:id])
   end
