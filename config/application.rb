@@ -23,6 +23,7 @@ module Scoreboard
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.app_version = 0.1.1
+    # noinspection RubyResolve
+    config.app_version = "0.1.1"
   end
 end

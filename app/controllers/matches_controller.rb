@@ -1,5 +1,4 @@
 class MatchesController < ApplicationController
-
   http_basic_authenticate_with name: Rails.application.credentials.dig(:login, :username), password: Rails.application.credentials.dig(:login, :password), except: :prod_show
 
   def show
@@ -22,10 +21,12 @@ class MatchesController < ApplicationController
     @match.destroy
     redirect_to matches_path
   end
+
+  # noinspection RailsParamDefResolve
   def create
     @match = Match.new(match_params)
     if @match.save
-      redirect_to @match, notice: 'Match was successfully created.'
+      redirect_to @match, notice: "Match was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
