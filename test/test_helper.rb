@@ -11,5 +11,11 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    def http_login
+      username = Rails.application.credentials.dig(:login, :username)
+      password = Rails.application.credentials.dig(:login, :password)
+
+      { HTTP_AUTHORIZATION:  ActionController::HttpAuthentication::Basic.encode_credentials(username, password) }
+    end
   end
 end
